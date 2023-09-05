@@ -1,0 +1,17 @@
+server.port: ${SERVER_PORT:8080}
+spring.application.name: ${SPRING_APPLICATION_NAME:test-s-ita-backend}
+
+spring.jackson.date-format: "yyyy-MM-dd"
+spring.jackson.time-zone: "Europe/Rome"
+
+api:
+  letturaSaldo:
+    url: "https://docs.fabrick.com/platform/apis/gbs-banking-account-cash-v4.0"
+  listaTransazioni:
+    url: "https://docs.fabrick.com/platform/apis/gbs-banking-account-cash-v4.0"
+  bonifico:
+    url: "https://docs.fabrick.com/platform/apis/gbs-banking-payments-moneyTransfers-v4.0"
+
+logging:
+  level:
+    eleonora.project.*: ${LOG_LEVEL:DEBUG}
