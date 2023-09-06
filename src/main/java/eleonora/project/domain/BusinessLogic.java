@@ -26,19 +26,14 @@ public class BusinessLogic {
     @Autowired
     private FabrickApi fabrickApi;
 
-    public LetturaSaldoResponse retrieveSaldo(Long accountId) {
+    public String retrieveSaldo(Long accountId) {
         try {
 
             // LOG TRACE
 
-            // CREATE BUSINESS OBJECT FOR CALL
-
-            // CALL METHOD FOR FABRICK API
-            fabrickApi.getLetturaSaldo(accountId);
+            return fabrickApi.getLetturaSaldo(accountId);
 
             // LOG TRACE
-
-            return null;
 
         } catch (Exception e) {
             // log ERROR
@@ -46,19 +41,14 @@ public class BusinessLogic {
         }
     }
 
-    public ListaTransazioniResponse retrieveTransazioni(ListaTransazioniRequest request) {
+    public String retrieveTransazioni(ListaTransazioniRequest request) {
         try {
 
             // LOG TRACE
 
-            // CREATE BUSINESS OBJECT FOR CALL
-
-            // CALL METHOD FOR FABRICK API
-            fabrickApi.getListaTransazioni(request);
+            return fabrickApi.getListaTransazioni(request);
 
             // LOG TRACE
-
-            return null;
 
         } catch (Exception e) {
             // log ERROR
@@ -66,7 +56,7 @@ public class BusinessLogic {
         }
     }
 
-    public BonificoResponse createBonifico(BonificoRequest request) {
+    public String createBonifico(BonificoRequest request) {
         try {
 
             // LOG TRACE

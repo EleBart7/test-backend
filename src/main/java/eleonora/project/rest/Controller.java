@@ -33,14 +33,12 @@ public class Controller {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
-    @GetMapping(value = "/letturaSaldo", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<LetturaSaldoResponse> letturaSaldo(
+    @GetMapping(value = "/letturaSaldo/{accountId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<String> letturaSaldo(
             @RequestHeader(value = "requestId", required = true) String requestId,
-            @RequestParam @Valid Long accountId
+            @PathVariable Long accountId
     ) {
-        LetturaSaldoResponse res = new LetturaSaldoResponse();
-
-        res = businessLogic.retrieveSaldo(accountId);
+        String res = businessLogic.retrieveSaldo(accountId);
 
         return ResponseEntity.ok(res);
     }
@@ -53,13 +51,11 @@ public class Controller {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @PostMapping(value = "/listaTransazioni", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ListaTransazioniResponse> listaTransazioni(
+    public ResponseEntity<String> listaTransazioni(
             @RequestHeader(value = "requestId", required = true) String requestId,
-            @RequestBody @Valid ListaTransazioniRequest request
+            @RequestBody ListaTransazioniRequest request
     ) {
-        ListaTransazioniResponse res = new ListaTransazioniResponse();
-
-        res = businessLogic.retrieveTransazioni(request);
+        String res = businessLogic.retrieveTransazioni(request);
 
         return ResponseEntity.ok(res);
     }
@@ -72,13 +68,11 @@ public class Controller {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @PostMapping(value = "/bonifico", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<BonificoResponse> bonifico(
+    public ResponseEntity<String> bonifico(
             @RequestHeader(value = "requestId", required = true) String requestId,
             @RequestBody @Valid BonificoRequest request
     ) {
-        BonificoResponse res = new BonificoResponse();
-
-        res = businessLogic.createBonifico(request);
+        String res = businessLogic.createBonifico(request);
 
         return ResponseEntity.ok(res);
     }

@@ -15,9 +15,9 @@ public class ListaTransazioniRequest {
 
     @NotNull
     @Schema(description = "Data di inizio per la ricerca di transazioni")
-    private Date fromAccountingDate;
+    private String from;
 
     @NotNull
     @Schema(description = "Data di fine per la ricerca di transazioni")
-    private Date toAccountingDate;
+    private String to;
 }
