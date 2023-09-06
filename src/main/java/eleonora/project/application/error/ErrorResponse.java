@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class ErrorResponse {
 
-    @Schema(description = "Codice del messaggio")
+    @Schema(description = "Codice di errore")
     private String code;
 
     @Schema(description = "Descrizione aggiuntiva")

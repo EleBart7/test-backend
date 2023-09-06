@@ -1,0 +1,17 @@
+server.port: ${SERVER_PORT:8080}
+spring.application.name: ${SPRING_APPLICATION_NAME:test-backend}
+
+spring.jackson.date-format: "yyyy-MM-dd"
+spring.jackson.time-zone: "Europe/Rome"
+
+api:
+  letturaSaldo:
+    url: "https://sandbox.platfr.io/api/gbs/banking/v4.0/accounts/{accountId}"
+  listaTransazioni:
+    url: "https://sandbox.platfr.io/api/gbs/banking/v4.0/accounts/{accountId}/transactions"
+  bonifico:
+    url: "https://sandbox.platfr.io//api/gbs/banking/v4.0/accounts/{accountId}/payments/money-transfers"
+
+logging:
+  level:
+    eleonora.project.*: ${LOG_LEVEL:TRACE}

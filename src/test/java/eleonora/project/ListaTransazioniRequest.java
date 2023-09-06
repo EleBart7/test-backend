@@ -1,7 +1,8 @@
-package eleonora.project.domain.model.request;
+package eleonora.project;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
 import javax.validation.constraints.NotNull;
 
 @Data
