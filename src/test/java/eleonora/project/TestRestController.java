@@ -33,9 +33,7 @@ public class TestRestController {
     public void getSaldo() throws Exception
     {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.add("requestId", "1");
+        HttpHeaders headers = getHttpHeaders();
 
         mvc.perform(MockMvcRequestBuilders
                 .get("/api/v1/letturaSaldo/{accountId}", "14537780")
@@ -52,10 +50,7 @@ public class TestRestController {
     @Test
     public void postListaTransazioni() throws Exception
     {
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.add("requestId", "1");
+        HttpHeaders headers = getHttpHeaders();
 
         ListaTransazioniRequest req = new ListaTransazioniRequest();
         req.setAccountId(Long.valueOf("14537780"));
@@ -77,9 +72,7 @@ public class TestRestController {
     @Test
     public void postBonifico() throws Exception
     {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.add("requestId", "1");
+        HttpHeaders headers = getHttpHeaders();
 
         BonificoRequest req = new BonificoRequest();
         req.setAccountId(Long.valueOf("14537780"));
@@ -102,9 +95,18 @@ public class TestRestController {
                 .content(om.writeValueAsString(req))
                 )
             .andDo(print())
-            .andExpect(status().isOk())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("KO"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.errors[*].description").value("Il conto beneficiario non puo' essere uguale a conto ordinante, di addebito o di addebito spese"));
+            .andExpect(status().is(400))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.statusCode").value("400"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.description").exists());
+    }
+
+    private HttpHeaders getHttpHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.add("requestId", "1");
+        headers.add("authSchema", "S2S");
+        headers.add("apiKey", "FXOVVXXHVCPVPBZXIJOBGUGSKHDNFRRQJP");
+        return headers;
     }
 
 }
