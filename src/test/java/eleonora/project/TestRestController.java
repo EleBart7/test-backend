@@ -39,7 +39,6 @@ public class TestRestController {
                 .get("/api/v1/letturaSaldo/{accountId}", "14537780")
                 .accept(MediaType.APPLICATION_JSON)
                 .headers(headers)
-                      //.param("accountId", "14537780")
                 )
             .andDo(print())
             .andExpect(status().isOk())

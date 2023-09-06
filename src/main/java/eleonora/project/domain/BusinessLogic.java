@@ -1,6 +1,5 @@
 package eleonora.project.domain;
 
-import eleonora.project.application.error.ApplicationException;
 import eleonora.project.domain.model.request.BonificoRequest;
 import eleonora.project.domain.model.request.LetturaSaldoRequest;
 import eleonora.project.domain.model.request.ListaTransazioniRequest;
