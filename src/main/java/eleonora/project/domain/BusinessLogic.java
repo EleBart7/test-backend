@@ -61,14 +61,9 @@ public class BusinessLogic {
 
             // LOG TRACE
 
-            // CREATE BUSINESS OBJECT FOR CALL
-
-            // CALL METHOD FOR FABRICK API
-            fabrickApi.doBonifico(request);
+            return fabrickApi.doBonifico(request);
 
             // LOG TRACE
-
-            return null;
 
         } catch (Exception e) {
             // log ERROR

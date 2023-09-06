@@ -1,14 +1,10 @@
 package eleonora.project.rest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eleonora.project.ConfigProperties;
 import eleonora.project.application.ApplicationException;
 import eleonora.project.domain.model.request.BonificoRequest;
 import eleonora.project.domain.model.request.ListaTransazioniRequest;
-import eleonora.project.domain.model.response.LetturaSaldoResponse;
-import eleonora.project.domain.model.response.ListaTransazioniResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -64,12 +60,13 @@ public class FabrickApi {
     }
 
     public String doBonifico(BonificoRequest request) {
+        log.trace("start bonifico");
         String url = configProperties.getBonificoUrl();
-        // CREARE IL CLIENT
-
-        // fare chiamata
-
-        return null;
+        url = url.replace("{accountId}", request.getAccountId().toString());
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = getHeaders();
+        HttpEntity<BonificoRequest> httpEntity = new HttpEntity<>(request, headers);
+        return restTemplate.exchange(url, HttpMethod.POST, httpEntity, String.class).getBody();
     }
 
     private HttpHeaders getHeaders() {
