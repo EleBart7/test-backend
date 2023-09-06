@@ -9,7 +9,7 @@ import lombok.Setter;
 public class ErrorResponse {
 
     @Schema(description = "Codice di errore")
-    private String code;
+    private Integer statusCode;
 
     @Schema(description = "Descrizione aggiuntiva")
     private String description;

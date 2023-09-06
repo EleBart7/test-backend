@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class ListaTransazioniRequest {
+public class ListaTransazioniRequest extends InfoRequest {
 
     @NotNull
     @Schema(description = "ID del conto")

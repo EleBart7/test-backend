@@ -1,16 +1,14 @@
 package eleonora.project.domain;
 
-import eleonora.project.application.ApplicationException;
-import eleonora.project.domain.model.Transazione;
+import eleonora.project.application.error.ApplicationException;
 import eleonora.project.domain.model.request.BonificoRequest;
+import eleonora.project.domain.model.request.LetturaSaldoRequest;
 import eleonora.project.domain.model.request.ListaTransazioniRequest;
 import eleonora.project.rest.FabrickApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -20,16 +18,16 @@ public class BusinessLogic {
     @Autowired
     private FabrickApi fabrickApi;
 
-    public String retrieveSaldo(Long accountId) {
+    public String retrieveSaldo(LetturaSaldoRequest request) {
         try {
 
             log.trace("init retrieve Saldo");
 
-            return fabrickApi.getLetturaSaldo(accountId);
+            return fabrickApi.getLetturaSaldo(request);
 
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ApplicationException(e.getMessage());
+            throw e;
         }
     }
 
@@ -42,7 +40,7 @@ public class BusinessLogic {
 
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ApplicationException(e.getMessage());
+            throw e;
         }
     }
 
@@ -55,7 +53,7 @@ public class BusinessLogic {
 
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new ApplicationException(e.getMessage());
+            throw e;
         }
     }
 }

@@ -2,6 +2,7 @@ package eleonora.project.rest;
 
 import eleonora.project.domain.BusinessLogic;
 import eleonora.project.domain.model.request.BonificoRequest;
+import eleonora.project.domain.model.request.LetturaSaldoRequest;
 import eleonora.project.domain.model.request.ListaTransazioniRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,16 @@ public class Controller {
     @GetMapping(value = "/letturaSaldo/{accountId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<String> letturaSaldo(
             @RequestHeader(value = "requestId", required = true) String requestId,
+            @RequestHeader(value = "apiKey", required = true) String apiKey,
+            @RequestHeader(value = "authSchema", required = true) String authSchema,
             @PathVariable Long accountId
     ) {
-        String res = businessLogic.retrieveSaldo(accountId);
+        LetturaSaldoRequest request = new LetturaSaldoRequest();
+        request.setAccountId(accountId);
+        request.setRequestId(requestId);
+        request.setApiKey(apiKey);
+        request.setAuthSchema(authSchema);
+        String res = businessLogic.retrieveSaldo(request);
 
         return ResponseEntity.ok(res);
     }
@@ -33,8 +41,13 @@ public class Controller {
     @PostMapping(value = "/listaTransazioni", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<String> listaTransazioni(
             @RequestHeader(value = "requestId", required = true) String requestId,
+            @RequestHeader(value = "apiKey", required = true) String apiKey,
+            @RequestHeader(value = "authSchema", required = true) String authSchema,
             @RequestBody ListaTransazioniRequest request
     ) {
+        request.setRequestId(requestId);
+        request.setApiKey(apiKey);
+        request.setAuthSchema(authSchema);
         String res = businessLogic.retrieveTransazioni(request);
 
         return ResponseEntity.ok(res);
@@ -44,8 +57,13 @@ public class Controller {
     @PostMapping(value = "/bonifico", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<String> bonifico(
             @RequestHeader(value = "requestId", required = true) String requestId,
+            @RequestHeader(value = "apiKey", required = true) String apiKey,
+            @RequestHeader(value = "authSchema", required = true) String authSchema,
             @RequestBody BonificoRequest request
     ) {
+        request.setRequestId(requestId);
+        request.setApiKey(apiKey);
+        request.setAuthSchema(authSchema);
         String res = businessLogic.createBonifico(request);
 
         return ResponseEntity.ok(res);

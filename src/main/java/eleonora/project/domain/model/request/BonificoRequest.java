@@ -3,12 +3,11 @@ package eleonora.project.domain.model.request;
 import eleonora.project.domain.model.Creditor;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class BonificoRequest {
+public class BonificoRequest extends InfoRequest {
 
     @NotNull
     @Schema(description = "ID del conto")
