@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class BusinessLogicService {
 
-    @Autowired
-    private FabrickApi fabrickApi;
+    private final FabrickApi fabrickApi;
 
     public String retrieveSaldo(LetturaSaldoRequest request) {
         try {
