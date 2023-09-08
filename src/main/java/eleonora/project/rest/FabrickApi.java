@@ -8,7 +8,7 @@ import eleonora.project.domain.model.request.ListaTransazioniRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -16,19 +16,21 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+@Service
 @Slf4j
 public class FabrickApi {
 
     @Autowired
-    ConfigProperties configProperties;
+    private ConfigProperties configProperties;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public String getLetturaSaldo(LetturaSaldoRequest request) {
         try {
             log.trace("start lettura saldo");
             String url = configProperties.getLetturaSaldoUrl();
             url = url.replace("{accountId}", request.getAccountId().toString());
-            RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = getHeaders(request);
             HttpEntity<String> httpEntity = new HttpEntity<>("no body", headers);
             String res = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class).getBody();
@@ -46,7 +48,6 @@ public class FabrickApi {
             log.trace("start lista transazioni");
             String url = configProperties.getListaTransazioniUrl();
             url = url.replace("{accountId}", request.getAccountId().toString());
-            RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = getHeaders(request);
             HttpEntity<String> httpEntity = new HttpEntity<>("no body", headers);
 
@@ -75,7 +76,6 @@ public class FabrickApi {
             log.trace("start bonifico");
             String url = configProperties.getBonificoUrl();
             url = url.replace("{accountId}", request.getAccountId().toString());
-            RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = getHeaders(request);
             HttpEntity<BonificoRequest> httpEntity = new HttpEntity<>(request, headers);
             String res = restTemplate.exchange(url, HttpMethod.POST, httpEntity, String.class).getBody();

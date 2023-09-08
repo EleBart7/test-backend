@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class Controller {
 
     @Autowired
-    BusinessLogic businessLogic;
+    private BusinessLogic businessLogic;
 
     @Operation(summary = "LETTURA SALDO", tags = {"letturaSaldo"})
     @GetMapping(value = "/letturaSaldo/{accountId}", produces = {MediaType.APPLICATION_JSON_VALUE})
