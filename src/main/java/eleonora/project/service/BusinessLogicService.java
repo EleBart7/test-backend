@@ -1,9 +1,9 @@
-package eleonora.project.domain;
+package eleonora.project.service;
 
-import eleonora.project.domain.model.request.BonificoRequest;
-import eleonora.project.domain.model.request.LetturaSaldoRequest;
-import eleonora.project.domain.model.request.ListaTransazioniRequest;
-import eleonora.project.rest.FabrickApi;
+import eleonora.project.service.model.request.BonificoRequest;
+import eleonora.project.service.model.request.LetturaSaldoRequest;
+import eleonora.project.service.model.request.ListaTransazioniRequest;
+import eleonora.project.controller.FabrickApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class BusinessLogic {
+public class BusinessLogicService {
 
     @Autowired
     private FabrickApi fabrickApi;

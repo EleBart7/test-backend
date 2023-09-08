@@ -5,12 +5,14 @@ spring.jackson.date-format: "yyyy-MM-dd"
 spring.jackson.time-zone: "Europe/Rome"
 
 api:
+  key: "FXOVVXXHVCPVPBZXIJOBGUGSKHDNFRRQJP"
+  authschema: "S2S"
   letturaSaldo:
     url: "https://sandbox.platfr.io/api/gbs/banking/v4.0/accounts/{accountId}"
   listaTransazioni:
     url: "https://sandbox.platfr.io/api/gbs/banking/v4.0/accounts/{accountId}/transactions"
   bonifico:
-    url: "https://sandbox.platfr.io//api/gbs/banking/v4.0/accounts/{accountId}/payments/money-transfers"
+    url: "https://sandbox.platfr.io/api/gbs/banking/v4.0/accounts/{accountId}/payments/money-transfers"
 
 logging:
   level:

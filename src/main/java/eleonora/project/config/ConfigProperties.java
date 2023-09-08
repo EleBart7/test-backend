@@ -1,4 +1,4 @@
-package eleonora.project;
+package eleonora.project.config;
 
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,12 +28,15 @@ public class ConfigProperties {
 
     @Value("${spring.application.name}")
     private String applicationName;
-
     @Value("${api.letturaSaldo.url}")
     private String letturaSaldoUrl;
     @Value("${api.listaTransazioni.url}")
     private String listaTransazioniUrl;
     @Value("${api.bonifico.url}")
 	private String bonificoUrl;
+    @Value("${api.key}")
+    private String apiKey;
+    @Value("${api.authschema}")
+    private String authSchema;
 
 }

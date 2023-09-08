@@ -1,11 +1,12 @@
 package eleonora.project;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eleonora.project.domain.BusinessLogic;
-import eleonora.project.domain.model.Account;
-import eleonora.project.domain.model.Creditor;
-import eleonora.project.rest.Controller;
-import eleonora.project.rest.FabrickApi;
+import eleonora.project.config.ConfigProperties;
+import eleonora.project.service.BusinessLogicService;
+import eleonora.project.service.model.Account;
+import eleonora.project.service.model.Creditor;
+import eleonora.project.controller.Controller;
+import eleonora.project.controller.FabrickApi;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(Controller.class)
-@Import({BusinessLogic.class, FabrickApi.class, ConfigProperties.class})
+@Import({BusinessLogicService.class, FabrickApi.class, ConfigProperties.class})
 public class TestRestController {
 
     @Autowired

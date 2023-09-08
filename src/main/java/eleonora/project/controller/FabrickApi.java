@@ -1,10 +1,9 @@
-package eleonora.project.rest;
-import eleonora.project.ConfigProperties;
+package eleonora.project.controller;
+import eleonora.project.config.ConfigProperties;
 import eleonora.project.application.error.ApplicationException;
-import eleonora.project.domain.model.request.BonificoRequest;
-import eleonora.project.domain.model.request.InfoRequest;
-import eleonora.project.domain.model.request.LetturaSaldoRequest;
-import eleonora.project.domain.model.request.ListaTransazioniRequest;
+import eleonora.project.service.model.request.BonificoRequest;
+import eleonora.project.service.model.request.LetturaSaldoRequest;
+import eleonora.project.service.model.request.ListaTransazioniRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -31,7 +30,7 @@ public class FabrickApi {
             log.trace("start lettura saldo");
             String url = configProperties.getLetturaSaldoUrl();
             url = url.replace("{accountId}", request.getAccountId().toString());
-            HttpHeaders headers = getHeaders(request);
+            HttpHeaders headers = getHeaders();
             HttpEntity<String> httpEntity = new HttpEntity<>("no body", headers);
             String res = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class).getBody();
             log.debug("Response: {}", res);
@@ -48,7 +47,7 @@ public class FabrickApi {
             log.trace("start lista transazioni");
             String url = configProperties.getListaTransazioniUrl();
             url = url.replace("{accountId}", request.getAccountId().toString());
-            HttpHeaders headers = getHeaders(request);
+            HttpHeaders headers = getHeaders();
             HttpEntity<String> httpEntity = new HttpEntity<>("no body", headers);
 
             String urlTemplate = UriComponentsBuilder.fromHttpUrl(url)
@@ -76,7 +75,7 @@ public class FabrickApi {
             log.trace("start bonifico");
             String url = configProperties.getBonificoUrl();
             url = url.replace("{accountId}", request.getAccountId().toString());
-            HttpHeaders headers = getHeaders(request);
+            HttpHeaders headers = getHeaders();
             HttpEntity<BonificoRequest> httpEntity = new HttpEntity<>(request, headers);
             String res = restTemplate.exchange(url, HttpMethod.POST, httpEntity, String.class).getBody();
             log.debug("Response: {}", res);
@@ -88,12 +87,12 @@ public class FabrickApi {
         }
     }
 
-    private HttpHeaders getHeaders(InfoRequest req) {
+    private HttpHeaders getHeaders() {
         log.trace("insert headers");
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.add("Api-Key", req.getApiKey());
-        headers.add("Auth-Schema", req.getAuthSchema());
+        headers.add("Api-Key", configProperties.getApiKey());
+        headers.add("Auth-Schema", configProperties.getAuthSchema());
         return headers;
     }
 

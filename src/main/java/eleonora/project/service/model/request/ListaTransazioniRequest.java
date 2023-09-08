@@ -1,4 +1,4 @@
-package eleonora.project.domain.model.request;
+package eleonora.project.service.model.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

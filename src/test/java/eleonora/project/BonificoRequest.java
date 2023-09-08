@@ -1,6 +1,6 @@
 package eleonora.project;
 
-import eleonora.project.domain.model.Creditor;
+import eleonora.project.service.model.Creditor;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
