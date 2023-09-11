@@ -4,8 +4,8 @@ import eleonora.project.application.error.ApplicationException;
 import eleonora.project.service.model.request.BonificoRequest;
 import eleonora.project.service.model.request.LetturaSaldoRequest;
 import eleonora.project.service.model.request.ListaTransazioniRequest;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -17,13 +17,12 @@ import java.util.Map;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class FabrickApi {
 
-    @Autowired
-    private ConfigProperties configProperties;
+    private final ConfigProperties configProperties;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public String getLetturaSaldo(LetturaSaldoRequest request) {
         try {

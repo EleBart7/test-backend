@@ -5,17 +5,17 @@ import eleonora.project.service.model.request.BonificoRequest;
 import eleonora.project.service.model.request.LetturaSaldoRequest;
 import eleonora.project.service.model.request.ListaTransazioniRequest;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController("ControllerV1")
 @RequestMapping("api/v1")
+@RequiredArgsConstructor
 public class Controller {
 
-    @Autowired
-    private BusinessLogicService businessLogicService;
+    private final BusinessLogicService businessLogicService;
 
     @Operation(summary = "LETTURA SALDO", tags = {"letturaSaldo"})
     @GetMapping(value = "/letturaSaldo/{accountId}", produces = {MediaType.APPLICATION_JSON_VALUE})
